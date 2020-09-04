@@ -92,9 +92,10 @@ func (c *Config) RequestToken() (requestToken, requestSecret string, err error) 
 	if requestToken == "" || requestSecret == "" {
 		return "", "", errors.New("oauth1: Response missing oauth_token or oauth_token_secret")
 	}
-	if values.Get(oauthCallbackConfirmedParam) != "true" {
-		return "", "", errors.New("oauth1: oauth_callback_confirmed was not true")
-	}
+	// XXX https://github.com/tripit/api/issues/255, the API doesn't assert this when it should
+	//if values.Get(oauthCallbackConfirmedParam) != "true" {
+	//	return "", "", errors.New("oauth1: oauth_callback_confirmed was not true")
+	//}
 	return requestToken, requestSecret, nil
 }
 
