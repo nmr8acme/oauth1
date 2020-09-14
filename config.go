@@ -127,9 +127,10 @@ func ParseAuthorizationCallback(req *http.Request) (requestToken, verifier strin
 	}
 	requestToken = req.Form.Get(oauthTokenParam)
 	verifier = req.Form.Get(oauthVerifierParam)
-	if requestToken == "" || verifier == "" {
-		return "", "", errors.New("oauth1: Request missing oauth_token or oauth_verifier")
-	}
+	// XXX Tripit doesn't return an oauth_verifier, so kludge it
+	//if requestToken == "" || verifier == "" {
+	//	return "", "", errors.New("oauth1: Request missing oauth_token or oauth_verifier")
+	//}
 	return requestToken, verifier, nil
 }
 
